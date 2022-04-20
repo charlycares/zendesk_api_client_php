@@ -6,6 +6,7 @@ use Zendesk\API\Exceptions\MissingParametersException;
 use Zendesk\API\Exceptions\ResponseException;
 use Zendesk\API\Http;
 use Zendesk\API\Resources\ResourceAbstract;
+use Zendesk\API\Traits\Resource\CreateMany;
 use Zendesk\API\Traits\Resource\Defaults;
 use Zendesk\API\Traits\Resource\DeleteMany;
 use Zendesk\API\Traits\Resource\FindMany;
@@ -31,6 +32,7 @@ class Tickets extends ResourceAbstract
     }
 
     use FindMany;
+    use CreateMany;
     use UpdateMany {
         UpdateMany::updateMany as bulkUpdate;
     }
@@ -87,6 +89,7 @@ class Tickets extends ResourceAbstract
 
         $this->setRoutes([
             'create'              => 'tickets.json',
+            'createMany' => 'tickets/create_many.json',
             'findMany'            => 'tickets/show_many.json',
             'updateMany'          => 'tickets/update_many.json',
             'markAsSpam'          => 'tickets/{id}/mark_as_spam.json',
